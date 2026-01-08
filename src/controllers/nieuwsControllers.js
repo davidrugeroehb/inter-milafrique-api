@@ -54,7 +54,7 @@ exports.getNieuwsById = async (req, res) => {
         if (rows.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'Nieuws item not found'
+                message: 'Nieuws artikel niet gevonden'
             });
         }
 
@@ -80,7 +80,7 @@ exports.createNieuws = async (req, res) => {
         if (!title || !content || !user_id) {
             return res.status(400).json({
                 success: false,
-                message: 'Title, content and user_id are required'
+                message: 'Title, content and user_id is nodig'
             });
         }
 
@@ -93,7 +93,7 @@ exports.createNieuws = async (req, res) => {
 
         res.status(201).json({
             success: true,
-            message: 'Nieuws created successfully',
+            message: 'Nieuws succesvol bijgewerkt',
             data: {
                 id: result.insertId,
                 title,
@@ -135,13 +135,13 @@ exports.updateNieuws = async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Nieuws updated successfully',
+            message: 'Nieuws geüpdate',
             data: { id, title, content }
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Error updating nieuws',
+            message: 'Error met nieuws-update',
             error: error.message
         });
     }
@@ -157,7 +157,7 @@ exports.deleteNieuws = async (req, res) => {
         if (existing.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: 'Nieuws not found'
+                message: 'Nieuws niet gevonden'
             });
         }
 
@@ -165,12 +165,12 @@ exports.deleteNieuws = async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Nieuws deleted successfully'
+            message: 'Nieuws verwijdert!'
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'Error deleting nieuws',
+            message: 'ERROR: nieuws niet verwijdert',
             error: error.message
         });
     }
