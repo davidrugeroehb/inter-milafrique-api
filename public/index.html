@@ -42,7 +42,7 @@
     <p>Haalt alle spelers op</p>
 
     <h3>GET /api/spelers/:id</h3>
-    <p>Haalt één speler op</p>
+    <p>Haalt één speler op ID</p>
 
     <h3>POST /api/spelers</h3>
     <pre>{
@@ -56,6 +56,21 @@
 
     <h3>DELETE /api/spelers/:id</h3>
     <p>Verwijdert een speler</p>
+</section>
+<section>
+    <h2>Antwoorden</h2>
+
+    <h3>Success</h3>
+    <pre>{
+  "success": true,
+  "data": {}
+}</pre>
+
+    <h3>Error</h3>
+    <pre>{
+  "success": false,
+  "message": "Error"
+}</pre>
 </section>
 </body>
 </html>
