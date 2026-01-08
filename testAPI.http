@@ -1,0 +1,27 @@
+### GET All Nieuws
+GET http://localhost:3000/api/nieuws
+
+### GET Nieuws with limit
+GET http://localhost:3000/api/nieuws?limit=2
+
+### GET Nieuws with search
+GET http://localhost:3000/api/nieuws?search=overwinning
+
+### GET One Nieuws
+GET http://localhost:3000/api/nieuws/1
+
+### POST Create Nieuws
+POST http://localhost:3000/api/nieuws
+Content-Type: application/json
+
+{
+  "title": "Test Nieuws via IntelliJ",
+  "content": "Dit is een test",
+  "user_id": 1
+}
+
+### GET All Spelers
+GET http://localhost:3000/api/spelers
+
+### GET Spelers filtered by position
+GET http://localhost:3000/api/spelers?position=Aanvaller
