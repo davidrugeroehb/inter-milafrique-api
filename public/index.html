@@ -9,5 +9,31 @@
     <h1>Inter Milafrique API</h1>
     <p>API voor mijn zaalvoetbalploeg</p>
 </header>
+<section>
+    <h2>localhost URL:</h2>
+    <p><code>http://localhost:3000/api</code></p>
+</section>
+<section>
+    <h2>Nieuws Endpoints</h2>
+
+    <h3>GET /api/nieuws</h3>
+    <p>Haalt alle nieuwsartikelen op</p>
+
+    <h3>GET /api/nieuws/:id</h3>
+    <p>Haalt één nieuwsartikel op</p>
+
+    <h3>POST /api/nieuws</h3>
+    <pre>{
+  "title": "Grote overwinning",
+  "content": "Inter Milafrique won met 5-2",
+  "user_id": 1
+}</pre>
+
+    <h3>PUT /api/nieuws/:id</h3>
+    <p>Update een nieuwsartikel</p>
+
+    <h3>DELETE /api/nieuws/:id</h3>
+    <p>Verwijdert een nieuwsartikel</p>
+</section>
 </body>
 </html>
