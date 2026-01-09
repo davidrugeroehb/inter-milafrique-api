@@ -15,7 +15,7 @@ POST http://localhost:3000/api/nieuws
 Content-Type: application/json
 
 {
-  "titel": "Test Nieuws via IntelliJ",
+  "titel": "Test 2.0",
   "inhoud": "Dit is een test"
 
 }
@@ -45,9 +45,9 @@ POST http://localhost:3000/api/spelers
 Content-Type: application/json
 
 {
-  "naam": "Bert Heyman",
+  "naam": "",
   "positie": "Middenvelder",
-  "rugnummer": 10
+  "rugnummer": 11
 }
 
 ### PUT Update Speler
