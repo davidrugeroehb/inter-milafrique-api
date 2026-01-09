@@ -32,7 +32,7 @@ Inter Milafrique Database De API maakt verbinding met een MySQL database. Voor l
 Deze instructies leggen uit hoe u de API lokaal kunt configureren en draaien.
 
 1. **Clone het project vanaf GitHub.** Open een terminal en voer dit commando uit:
-    * `git clone https://github.com/[jouw-username]/inter-milafrique-api.git`
+    * `git clone https://github.com/davidrugeroehb/inter-milafrique-api.git`
 
 2. **Navigeer naar de projectmap.**
     * `cd inter-milafrique-api`
