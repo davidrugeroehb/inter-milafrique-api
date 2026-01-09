@@ -15,13 +15,56 @@ POST http://localhost:3000/api/nieuws
 Content-Type: application/json
 
 {
-  "title": "Test Nieuws via IntelliJ",
-  "content": "Dit is een test",
-  "user_id": 1
+  "titel": "Test Nieuws via IntelliJ",
+  "inhoud": "Dit is een test"
+
 }
+### PUT Update Nieuws (vervang de 1 door een bestaand ID)
+PUT http://localhost:3000/api/nieuws/1
+Content-Type: application/json
+
+{
+  "titel": "Geüpdatet Nieuws",
+  "inhoud": "De inhoud is aangepast."
+}
+
+### DELETE Verwijder Nieuws (vervang de 1 door een bestaand ID)
+DELETE http://localhost:3000/api/nieuws/1
 
 ### GET All Spelers
 GET http://localhost:3000/api/spelers
 
 ### GET Spelers filtered by position
 GET http://localhost:3000/api/spelers?position=Aanvaller
+
+### GET One Speler
+GET http://localhost:3000/api/spelers/1
+
+### POST Create Speler
+POST http://localhost:3000/api/spelers
+Content-Type: application/json
+
+{
+  "naam": "Bert Heyman",
+  "positie": "Middenvelder",
+  "rugnummer": 10
+}
+
+### PUT Update Speler
+PUT http://localhost:3000/api/spelers/1
+Content-Type: application/json
+
+{
+  "naam": "Bert Heyman",
+  "positie": "Aanvaller",
+  "rugnummer": 10
+}
+
+### GET Spelers met limit en offset
+GET http://localhost:3000/api/spelers?limit=2&offset=1
+
+### GET Spelers met search
+GET http://localhost:3000/api/spelers?search=Kevin
+
+### DELETE Verwijder Speler
+DELETE http://localhost:3000/api/spelers/1

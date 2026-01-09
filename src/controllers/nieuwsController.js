@@ -1,18 +1,16 @@
 const db = require('../config/database');
 
-
 exports.getAllNieuws = async (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 10;
         const offset = parseInt(req.query.offset) || 0;
         const search = req.query.search || '';
 
+        // Aangepast: Geen JOIN met users (want die tabel is er niet)
         let query = `
-            SELECT n.*, u.name as author_name
-            FROM nieuws n
-            LEFT JOIN users u ON n.user_id = u.id
-            WHERE n.title LIKE ? OR n.content LIKE ?
-            ORDER BY n.published_at DESC
+            SELECT * FROM nieuws
+            WHERE titel LIKE ? OR inhoud LIKE ?
+            ORDER BY datum DESC
             LIMIT ? OFFSET ?
         `;
 
@@ -22,11 +20,7 @@ exports.getAllNieuws = async (req, res) => {
         res.json({
             success: true,
             data: rows,
-            meta: {
-                limit,
-                offset,
-                search
-            }
+            meta: { limit, offset, search }
         });
     } catch (error) {
         res.status(500).json({
@@ -37,19 +31,10 @@ exports.getAllNieuws = async (req, res) => {
     }
 };
 
-
 exports.getNieuwsById = async (req, res) => {
     try {
         const { id } = req.params;
-
-        const query = `
-            SELECT n.*, u.name as author_name
-            FROM nieuws n
-            LEFT JOIN users u ON n.user_id = u.id
-            WHERE n.id = ?
-        `;
-
-        const [rows] = await db.query(query, [id]);
+        const [rows] = await db.query('SELECT * FROM nieuws WHERE id = ?', [id]);
 
         if (rows.length === 0) {
             return res.status(404).json({
@@ -58,10 +43,7 @@ exports.getNieuwsById = async (req, res) => {
             });
         }
 
-        res.json({
-            success: true,
-            data: rows[0]
-        });
+        res.json({ success: true, data: rows[0] });
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -71,34 +53,28 @@ exports.getNieuwsById = async (req, res) => {
     }
 };
 
-
 exports.createNieuws = async (req, res) => {
     try {
-        const { title, content, user_id } = req.body;
+        const { titel, inhoud } = req.body;
 
-
-        if (!title || !content || !user_id) {
+        if (!titel || !inhoud) {
             return res.status(400).json({
                 success: false,
-                message: 'Title, content and user_id is nodig'
+                message: 'titel en inhoud zijn verplicht'
             });
         }
 
-        const query = `
-            INSERT INTO nieuws (title, content, user_id, published_at, created_at, updated_at)
-            VALUES (?, ?, ?, NOW(), NOW(), NOW())
-        `;
-
-        const [result] = await db.query(query, [title, content, user_id]);
+        // FIX: Kolommen en waarden komen nu overeen
+        const query = 'INSERT INTO nieuws (titel, inhoud, datum) VALUES (?, ?, NOW())';
+        const [result] = await db.query(query, [titel, inhoud]);
 
         res.status(201).json({
             success: true,
-            message: 'Nieuws succesvol bijgewerkt',
+            message: 'Nieuws succesvol aangemaakt',
             data: {
                 id: result.insertId,
-                title,
-                content,
-                user_id
+                titel,
+                inhoud
             }
         });
     } catch (error) {
@@ -110,33 +86,24 @@ exports.createNieuws = async (req, res) => {
     }
 };
 
-
 exports.updateNieuws = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, content } = req.body;
-
+        const { titel, inhoud } = req.body;
 
         const [existing] = await db.query('SELECT * FROM nieuws WHERE id = ?', [id]);
         if (existing.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'Nieuws not found'
-            });
+            return res.status(404).json({ success: false, message: 'Nieuws niet gevonden' });
         }
 
-        const query = `
-            UPDATE nieuws
-            SET title = ?, content = ?, updated_at = NOW()
-            WHERE id = ?
-        `;
-
-        await db.query(query, [title, content, id]);
+        // Aangepast: updated_at weggehaald want die kolom is er niet in TablePlus
+        const query = 'UPDATE nieuws SET titel = ?, inhoud = ? WHERE id = ?';
+        await db.query(query, [titel, inhoud, id]);
 
         res.json({
             success: true,
             message: 'Nieuws geüpdate',
-            data: { id, title, content }
+            data: { id, titel, inhoud }
         });
     } catch (error) {
         res.status(500).json({
@@ -147,30 +114,21 @@ exports.updateNieuws = async (req, res) => {
     }
 };
 
-
 exports.deleteNieuws = async (req, res) => {
     try {
         const { id } = req.params;
-
-
         const [existing] = await db.query('SELECT * FROM nieuws WHERE id = ?', [id]);
+
         if (existing.length === 0) {
-            return res.status(404).json({
-                success: false,
-                message: 'Nieuws niet gevonden'
-            });
+            return res.status(404).json({ success: false, message: 'Nieuws niet gevonden' });
         }
 
         await db.query('DELETE FROM nieuws WHERE id = ?', [id]);
-
-        res.json({
-            success: true,
-            message: 'Nieuws verwijdert!'
-        });
+        res.json({ success: true, message: 'Nieuws verwijderd!' });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: 'ERROR: nieuws niet verwijdert',
+            message: 'ERROR: nieuws niet verwijderd',
             error: error.message
         });
     }
