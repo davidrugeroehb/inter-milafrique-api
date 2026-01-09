@@ -2,3 +2,59 @@
 
 ## Projectbeschrijving
 Ik heb gekozen voor een Inter Milafrique API omdat ik zelf lid ben van deze zaalvoetbalploeg die we vorig jaar hebben opgericht. Deze API biedt toegang tot alle informatie over de ploeg en biedt functies zoals:
+
+## API
+Inter Milafrique Database De API maakt verbinding met een MySQL database. Voor lokale ontwikkeling kan de database gevuld worden via de Laravel seeder van het hoofdproject.
+
+## Endpoints
+* `GET /api/nieuws` | Haalt alle nieuwsartikelen op (ondersteunt `search` en `limit`)
+* `GET /api/spelers` | Haalt alle spelers op (ondersteunt `position` filter)
+* `POST /api/spelers` | Voegt een nieuwe speler toe aan de database
+* `PUT /api/nieuws/:id` | Wijzigt een bestaand nieuwsbericht
+* `DELETE /api/spelers/:id` | Verwijdert een speler uit het systeem
+
+## Functionele Vereisten
+* **Twee CRUD interfaces (Nieuws & Spelers):** De mogelijkheid om voor deze twee entiteiten:
+    * Een lijst van alle huidige entiteiten op te halen.
+    * De details van een entiteit weer te geven.
+    * Een nieuwe instantie van de entiteit toe te voegen aan de database.
+    * Een bestaande instantie van de entiteit te updaten.
+    * Een bestaande instantie van de entiteit te verwijderen.
+* **Basisvalidatie:** * Velden mogen standaard niet leeg zijn.
+    * Numerieke velden (zoals `jersey_number`) aanvaarden geen strings.
+    * Namen kunnen geen cijfers bevatten.
+    * Unieke e-mailvalidatie voor spelers.
+* **Limit & Offset:** Minstens één endpoint (`/api/nieuws`) waarbij entiteiten teruggegeven worden met een `limit` en een `offset` parameter voor paginatie.
+* **Zoekfunctionaliteit:** Minstens één endpoint (`/api/spelers`) waarbij entiteiten teruggegeven worden na het zoeken op een waarde van minstens één veld (zoals naam of positie).
+* **Documentatie pagina:** Een correct opgebouwde HTML-pagina die zichtbaar is op de **root (/)** van het project. Deze pagina beschrijft alle beschikbare endpoints en hun parameters.
+
+## Installatiehandleiding
+Deze instructies leggen uit hoe u de API lokaal kunt configureren en draaien.
+
+1. **Clone het project vanaf GitHub.** Open een terminal en voer dit commando uit:
+    * `git clone https://github.com/[jouw-username]/inter-milafrique-api.git`
+
+2. **Navigeer naar de projectmap.**
+    * `cd inter-milafrique-api`
+
+3. **Installeer de dependencies.**
+    * `npm install`
+
+4. **Configureer de environment variables.** Maak een `.env` bestand aan in de root met de volgende inhoud:
+    * `DB_HOST=127.0.0.1`
+    * `DB_NAME=inter_milafrique`
+    * `DB_USER=root`
+    * `DB_PASSWORD=`
+
+**Start de server.**
+Voer deze commando uit
+* `npm run dev`  
+  De API is nu bereikbaar op: **http://localhost:3000**
+
+## Bronnenlijst
+
+## Auteur
+* **Naam:** [David Rugero]
+* **School:** [Erasmushogeschool Brussel]
+* **Docent:** [Bert Heyman]
+* **Datum:** [09/01/2026]
