@@ -48,15 +48,37 @@ Deze instructies leggen uit hoe u de API lokaal kunt configureren en draaien.
 3. **Installeer de dependencies.**
     * `npm install`
 
-4. **Configureer de environment variables.** Maak een `.env` bestand aan in de root met de volgende inhoud:
+4. **Database Configureren**
+   - Lokale MySQL-server starten met DBngin
+   - Maak een nieuwe database aan genaamd inter_milafrique
+   - Importeer de tabellen:
+     ```sql
+      CREATE TABLE spelers (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     naam VARCHAR(255) NOT NULL,
+     positie VARCHAR(100) NOT NULL,
+     rugnummer INT NOT NULL
+     );
+     
+     CREATE TABLE nieuws (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     titel VARCHAR(255) NOT NULL,
+     inhoud TEXT NOT NULL,
+     datum DATETIME DEFAULT CURRENT_TIMESTAMP
+     );```
+   
+
+5. **Configureer de environment variables.** Maak een `.env` bestand aan in de root met de volgende inhoud:
+    * `PORT = 3000`
     * `DB_HOST=127.0.0.1`
     * `DB_NAME=inter_milafrique`
+    * `DB_USER=3306`
     * `DB_USER=root`
     * `DB_PASSWORD=`
 
 **Start de server.**
 Voer deze commando uit
-* `npm run dev`  
+* `npm start`  
   De API is nu bereikbaar op: **http://localhost:3000**
 
 ## Bronnenlijst
