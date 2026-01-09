@@ -82,6 +82,12 @@ Voer deze commando uit
   De API is nu bereikbaar op: **http://localhost:3000**
 
 ## Bronnenlijst
+- Backend Web Cursusmateriaal
+- Eerder kreeg ik het vak Back-End Development aan UCLL, wat hielp bij algemene logica (geen code werd hergebruikt).
+- https://restfulapi.net/http-methods/
+- https://expressjs.com/en/guide/routing.html
+- Traversy Media. (2024, 7 mei). Express Crash Course [Video]. YouTube. https://www.youtube.com/watch?v=CnH3kAXSrmU
+- AI-tools voor foutopsporingen
 
 ## Auteur
 * **Naam:** [David Rugero]
